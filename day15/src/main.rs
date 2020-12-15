@@ -5,14 +5,17 @@ use std::time::Instant;
 //      I just ran the thing a couple of times
 //      with 30 million iterations and compared runtimes)
 //
-// 1. Change hashmap from <i32, [isize ; 2]> to <i32, i32> 
+// 1. Build release binary instead of running debug binary
+//      runtime down from ~48s to ~4s
+//
+// 2. Change hashmap from <i32, [isize ; 2]> to <i32, i32> 
 //    by leveraging the return value of hashmap.insert()
-//      needs less calls to hashmap and less comparisons. 
-//      Time down from ~48s to ~18s
-// 2. change usize to i32
-//      cuts runtime down from ~18s to ~17s
-// 3. Build release binary instead of running debug binary
-//      runtime down from ~16s to ~3s
+//    to track previous indexes
+//      needs less calls to hashmap and less comparisons.
+//      
+// 3. change usize to i32
+//      very minor difference 
+
 fn calculate(start: &Vec<i32>, limit: i32) -> Option<i32> {
     let mut seen: HashMap<i32, i32> = HashMap::new();
     let mut last = 0;
